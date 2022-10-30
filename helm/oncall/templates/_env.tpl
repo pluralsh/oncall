@@ -190,6 +190,14 @@
 {{- end -}}
 {{- end -}}
 
+{{- define "snippet.postgresql.sslmode" -}}
+{{- if and (not .Values.mariadb.enabled) .Values.externalPostgresql.sslmode -}}
+{{- required "externalPostgresql.sslmode is required if not postgresql.enabled"  .Values.externalPostgresql.sslmode | quote }}
+{{- else -}}
+"disable"
+{{- end -}}
+{{- end -}}
+
 {{- define "snippet.postgresql.db" -}}
 {{- if and (not .Values.postgresql.enabled) .Values.externalPostgresql.db -}}
 {{- required "externalPostgresql.db is required if not postgresql.enabled" .Values.externalPostgresql.db | quote}}
