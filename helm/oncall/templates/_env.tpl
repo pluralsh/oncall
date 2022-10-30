@@ -147,6 +147,8 @@
   value: {{ include "snippet.postgresql.db" . }}
 - name: DATABASE_USER
   value: {{ include "snippet.postgresql.user" . }}
+- name: DATABASE_SSL_MODE
+  value: {{ include "snippet.postgresql.sslmode" . }}
 - name: DATABASE_PASSWORD
   valueFrom:
     secretKeyRef:
