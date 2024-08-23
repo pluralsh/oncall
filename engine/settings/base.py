@@ -97,6 +97,7 @@ DATABASE_USER = os.getenv("DATABASE_USER") or os.getenv("MYSQL_USER")
 DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD") or os.getenv("MYSQL_PASSWORD")
 DATABASE_HOST = os.getenv("DATABASE_HOST") or os.getenv("MYSQL_HOST")
 DATABASE_PORT = os.getenv("DATABASE_PORT") or os.getenv("MYSQL_PORT")
+DATABASE_SSL_MODE = os.getenv("DATABASE_SSL_MODE")
 
 DATABASE_TYPE = os.getenv("DATABASE_TYPE", DatabaseTypes.MYSQL).lower()
 assert DATABASE_TYPE in {DatabaseTypes.MYSQL, DatabaseTypes.POSTGRESQL, DatabaseTypes.SQLITE3}
@@ -127,6 +128,9 @@ DATABASE_CONFIGS = {
         "PASSWORD": DATABASE_PASSWORD,
         "HOST": DATABASE_HOST,
         "PORT": DATABASE_PORT,
+        "OPTIONS": {
+            "sslmode": DATABASE_SSL_MODE
+        },
     },
 }
 

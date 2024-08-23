@@ -147,6 +147,8 @@
   value: {{ include "snippet.postgresql.db" . }}
 - name: DATABASE_USER
   value: {{ include "snippet.postgresql.user" . }}
+- name: DATABASE_SSL_MODE
+  value: {{ include "snippet.postgresql.sslmode" . }}
 - name: DATABASE_PASSWORD
   valueFrom:
     secretKeyRef:
@@ -185,6 +187,14 @@
 {{- required "externalPostgresql.port is required if not postgresql.enabled"  .Values.externalPostgresql.port | quote }}
 {{- else -}}
 "5432"
+{{- end -}}
+{{- end -}}
+
+{{- define "snippet.postgresql.sslmode" -}}
+{{- if and (not .Values.mariadb.enabled) .Values.externalPostgresql.sslmode -}}
+{{- required "externalPostgresql.sslmode is required if not postgresql.enabled"  .Values.externalPostgresql.sslmode | quote }}
+{{- else -}}
+"disable"
 {{- end -}}
 {{- end -}}
 
